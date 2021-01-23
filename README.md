@@ -34,7 +34,7 @@
 </div>
 
 <div style = "font-size: 16px, font-family: Arial">
-    <h2> <strong> Tecnologies 🚀 </strong> <br><br></h2>
+    <h2> <strong> Tecnologies 🚀 </strong> <br></h2>
     <ul>
         <li style = "margin: 15px"> Map Library - Leaflet
         </li>
