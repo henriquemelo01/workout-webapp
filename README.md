@@ -1,5 +1,5 @@
 <div style = "font-size: 16px, font-family: Arial">
-    <h2> <strong> User Story 🏃‍♂️🚲</strong> <hr> </h2>
+    <h2> <strong> User Story 🏃‍♂️🚲</strong> </h2><br>
     <p  style = "text-indent: 35px"><strong>  <u>O que é ?</u></strong> Descrição das funcionalidades da aplicação a partir da perspectiva do usuário </p>
     <ul>
         <li style = "margin: 15px"> Como um usuário que gosta de práticar exercícios, busco uma aplicação que contém um mapa onde posso marcar os locais que são bons para prática de algum esporte para que assim possa me lembrar dos melhores picos em que pratiquei algum exercício e quais foram os locais em que pratiquei mais exercícios;
@@ -14,7 +14,7 @@
 </div>
 
 <div style = "font-size: 16px, font-family: Arial">
-    <h2> <strong> Features </strong> <hr> </h2>
+    <h2> <strong> Features </strong></h2><br>
     <ul>
         <li style = "margin: 15px"> Mapa onde o usuário poderá clicar para adicionar um novo exercício;
         </li>
@@ -34,7 +34,7 @@
 </div>
 
 <div style = "font-size: 16px, font-family: Arial">
-    <h2> <strong> Tecnologies 🚀 </strong> <hr> </h2>
+    <h2> <strong> Tecnologies 🚀 </strong> <br><br></h2>
     <ul>
         <li style = "margin: 15px"> Map Library - Leaflet
         </li>
