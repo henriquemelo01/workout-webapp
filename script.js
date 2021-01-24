@@ -11,7 +11,53 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-// Classes: App, Workout -> Running, Cycling
+// ========================================
+
+// Data clases
+
+class Workout {
+  // Instance/Public properites - New feature ***
+  date = new Date();
+
+  // Em aplicações reais usamos uma API pra gerar um ID unico para cada objeto criado
+  id = (Date.now() + '').slice(-10); // Id = String com os ultimos 10 números de Date
+
+  constructor(coords, distance, duration) {
+    this.coords = coords; // [lat,lng]
+    this.distance = distance; // km
+    this.duration = duration; // min
+  }
+}
+
+class Running extends Workout {
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+    this.calcPace();
+  }
+
+  calcPace() {
+    // min/km
+    this.pace = this.duration / this.distance;
+  }
+}
+
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.calcSpeed();
+    this.elevationGain = elevationGain;
+  }
+
+  calcSpeed() {
+    // km / hr
+    this.speed = this.distance / (this.duration / 60);
+  }
+}
+
+// ========================================
+
+// App Class
 
 class App {
   // Private Var
@@ -19,8 +65,10 @@ class App {
   #mapEvent;
 
   constructor() {
+    this.workouts = [];
+
     // Display Map, assim que criarmos uma instância.
-    this._getPosition();
+    this._getPosition(); // geolocation.getCurrentPosition + load map
 
     // Events
 
@@ -101,9 +149,14 @@ class App {
   }
 }
 
-// Precisa ser criado após o mapa ser carregado
+// ========================================
+
+// Running App
+
+// Testando workout classes
+// const run1 = new Running([15, 12], 2, 45, 55, 1000);
+// const ciclista1 = new Cycling([15, 12], 2, 10, 2);
+// console.log(run1);
+// console.log(ciclista1);
 
 const app = new App();
-console.log(app);
-
-// OBS: Chamando a successful callback no metodo getCurrentPosition() -> Como o this da callback não esta apontando para o objeto foi necessário usar o metodo bind (retorna uma nova função) para setarmos o this manualmente
