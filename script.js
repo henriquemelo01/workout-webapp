@@ -15,6 +15,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 class Workout {
   // Instance/Public properites - New feature ***
   date = new Date();
+  click = 0;
 
   // Em aplicações reais usamos uma API pra gerar um ID unico para cada objeto criado
   id = (Date.now() + '').slice(-10); // Id = String com os ultimos 10 números de Date
@@ -24,6 +25,8 @@ class Workout {
     this.distance = distance; // km
     this.duration = duration; // min
   }
+
+  // Private Methods
 
   _description() {
     const months = [
@@ -44,6 +47,11 @@ class Workout {
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
       months[this.date.getMonth()]
     } ${this.date.getDate()}`;
+  }
+
+  // Instance Methods - Public Interface ** Erro
+  click() {
+    this.click++;
   }
 }
 
@@ -92,6 +100,7 @@ class App {
   constructor() {
     // Display Map, assim que criarmos uma instância.
     this._getPosition(); // geolocation.getCurrentPosition + load map
+    this._getLocalStorage();
 
     // Events
 
@@ -130,6 +139,9 @@ class App {
 
     //  O metodo on da library funciona como o addEventListener
     this.#map.on('click', this._showForm.bind(this));
+
+    // Render Workouts saved at local storage 
+    this.#workouts.forEach((workout) => this.renderWorkoutMarker(workout));
   }
 
   _showForm(mapE) {
@@ -193,6 +205,9 @@ class App {
 
     // Add new workout to workouts array
     this.#workouts.push(workout);
+
+    // Add Workout to the local storage
+    this._setLocalStorage();
 
     // Render Workout as a Marker
     this.renderWorkoutMarker(workout);
@@ -295,7 +310,37 @@ class App {
     );
 
     // Move to marker
-    this.#map.setView(clickedWorkout.coords, 16);
+    this.#map.setView(clickedWorkout.coords, 16, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+
+    // clickedWorkout.click();
+  }
+
+  _setLocalStorage() {
+    // JSON.stringfy(OBJ) -> Converte o objeto em uma string (JSON)
+    localStorage.setItem("workouts",JSON.stringify(this.#workouts));
+  }
+
+  _getLocalStorage() {
+    // JSON.parse(JSON) -> Converte o JSON em Objeto, entretanto o mesmo se torna apenas um regular object, assim perde seu prototype chain 
+    const data = JSON.parse(localStorage.getItem("workouts"));
+
+    if (!data) return;
+    this.#workouts = data; 
+
+    this.#workouts.forEach((workout) =>{
+      this._renderWorkout(workout);
+     });
+
+  }
+
+  resetLocalStorage() {
+    localStorage.removeItem("workouts");
+    location.reload() // reload the page 
   }
 }
 
