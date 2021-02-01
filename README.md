@@ -1,8 +1,10 @@
+<h1 align = "center" > <b> Workout App - Web Page 🏃‍♂️🚴‍♂️</b> </h1>
+
 <div style = "font-size: 16px, font-family: Arial">
     <h2> <strong> Overview 🏃‍♂️🚲</strong> </h2><br>
-    <p>GIF DA Aplicação </p>
+    <img src = "workout-WebApp.gif"/>
 </div>
-
+<br>
 <div style = "font-size: 16px, font-family: Arial">
     <h2> <strong> User Story 💻</strong> </h2><br>
     <p  style = "text-indent: 35px"><strong>  <u>O que é ?</u></strong> Descrição das funcionalidades da aplicação a partir da perspectiva do usuário </p>
